@@ -31,7 +31,6 @@ type Issue struct {
 type IssueFields struct {
 	// TODO Missing fields
 	//	* "timespent": null,
-	//	* "fixVersions": [],
 	//	* "aggregatetimespent": null,
 	//	* "workratio": -1,
 	//	* "lastViewed": null,
@@ -45,26 +44,27 @@ type IssueFields struct {
 	//	* "subtasks": [],
 	//	* "environment": null,
 	//	* "duedate": null,
-	Type              IssueType    `json:"issuetype"`
-	Project           Project      `json:"project,omitempty"`
-	Resolution        *Resolution  `json:"resolution,omitempty"`
-	Priority          *Priority    `json:"priority,omitempty"`
-	Resolutiondate    string       `json:"resolutiondate,omitempty"`
-	Created           string       `json:"created,omitempty"`
-	Watches           *Watches     `json:"watches,omitempty"`
-	Assignee          *Assignee    `json:"assignee,omitempty"`
-	Updated           string       `json:"updated,omitempty"`
-	Description       string       `json:"description,omitempty"`
-	Summary           string       `json:"summary"`
-	Creator           *Assignee    `json:"Creator,omitempty"`
-	Reporter          *Assignee    `json:"reporter,omitempty"`
-	Components        []*Component `json:"components,omitempty"`
-	Status            *Status      `json:"status,omitempty"`
-	Progress          *Progress    `json:"progress,omitempty"`
-	AggregateProgress *Progress    `json:"aggregateprogress,omitempty"`
-	Worklog           *Worklog     `json:"worklog,omitempty"`
-	IssueLinks        []*IssueLink `json:"issuelinks,omitempty"`
-	Comments          *CommentList `json:"comment,omitempty"`
+	Type              IssueType     `json:"issuetype"`
+	Project           Project       `json:"project,omitempty"`
+	Resolution        *Resolution   `json:"resolution,omitempty"`
+	Priority          *Priority     `json:"priority,omitempty"`
+	Resolutiondate    string        `json:"resolutiondate,omitempty"`
+	Created           string        `json:"created,omitempty"`
+	Watches           *Watches      `json:"watches,omitempty"`
+	Assignee          *Assignee     `json:"assignee,omitempty"`
+	Updated           string        `json:"updated,omitempty"`
+	Description       string        `json:"description,omitempty"`
+	Summary           string        `json:"summary"`
+	Creator           *Assignee     `json:"Creator,omitempty"`
+	Reporter          *Assignee     `json:"reporter,omitempty"`
+	Components        []*Component  `json:"components,omitempty"`
+	Status            *Status       `json:"status,omitempty"`
+	Progress          *Progress     `json:"progress,omitempty"`
+	AggregateProgress *Progress     `json:"aggregateprogress,omitempty"`
+	Worklog           *Worklog      `json:"worklog,omitempty"`
+	IssueLinks        []*IssueLink  `json:"issuelinks,omitempty"`
+	Comments          *CommentList  `json:"comment,omitempty"`
+	FixVersions       []*FixVersion `json:"fixVersions,omitempty"`
 }
 
 // IssueType represents a type of a JIRA issue.
@@ -204,6 +204,18 @@ type CommentList struct {
 	MaxResults int       `json:"maxResults"`
 	Total      int       `json:"total"`
 	Comments   []Comment `json:"comments"`
+}
+
+// FixVersion represents a software release in which an issue is fixed.
+type FixVersion struct {
+	Archived        *bool  `json:"archived,omitempty"`
+	ID              string `json:"id,omitempty"`
+	Name            string `json:"name,omitempty"`
+	ProjectID       int    `json:"projectId,omitempty"`
+	ReleaseDate     string `json:"releaseDate,omitempty"`
+	Released        *bool  `json:"released,omitempty"`
+	Self            string `json:"self,omitempty"`
+	UserReleaseDate string `json:"userReleaseDate,omitempty"`
 }
 
 // Get returns a full representation of the issue for the given issue key.
